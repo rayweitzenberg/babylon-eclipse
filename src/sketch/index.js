@@ -1,27 +1,15 @@
 export default function sketch(s) {
-  let x, y, backgroundColor;
-  let x2 = 20;
-  let x1 = 0;
-  const velocity = 20;
-
-  const tileCount = 10;
-  let actRandomSeed = 0;
-  let actStrokeCap;
-
-  // const yPos = 10
-  let lineOne
+  
   let theLines = []
 
   s.setup = () => {
     s.createCanvas(600, 600);
-    backgroundColor = s.color(s.random(255), s.random(255), s.random(255));
-    s.frameRate(30);
+    // backgroundColor = s.color(s.random(255), s.random(255), s.random(255));
+    // s.frameRate(30);
 
 
-    for (let ranY = 0; ranY < 5; ranY++) {
+    for (let ranY = 0; ranY < 30; ranY++) {
       theLines.push(new singleLine())
-      // console.log('theLines', theLines[ranY])
-      // console.log('ranY', ranY)
     }
   };
 
@@ -30,7 +18,7 @@ export default function sketch(s) {
     s.background(242, 203, 5);
 
     for (let i = 0; i < theLines.length; i++) {
-      theLines[i].move()
+      theLines[i].move(s.random(10, 50))
       theLines[i].display()
     }
   };
@@ -40,25 +28,25 @@ export default function sketch(s) {
       this.x1 = x1;
       this.x2 = x2;
       this.x1 = 0;
-      this.x2 = 50;
+      this.x2 = s.random(-400, s.width);
       this.yPos = s.random(s.height);
+      this.velocity = s.random(20, 50)
     }
 
-    move() {
+    move(randVelocity) {
       if (this.x2 < s.width) {
-        this.x2 += velocity;
-        console.log('this.x2', this.x2)
+        this.x2 += randVelocity;
       }
 
       if (this.x2 >= s.width) {
         this.x2 = s.width;
-        this.x1 += velocity;
-        console.log('x2 end', this.x2)
+        this.x1 += randVelocity;
       }
 
       if (this.x1 >= s.width) {
         this.x1 = 0;
         this.x2 = 0;
+        this.yPos = s.random(s.height);
       }
     }
 
