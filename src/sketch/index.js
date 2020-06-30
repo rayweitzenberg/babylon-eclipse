@@ -8,8 +8,9 @@ export default function sketch(s) {
     // backgroundColor = s.color(s.random(255), s.random(255), s.random(255));
     // s.frameRate(30);
 
+    const numLines = s.windowWidth / 20
 
-    for (let ranY = 0; ranY < 70; ranY++) {
+    for (let ranY = 0; ranY < numLines; ranY++) {
       leftRightLines.push(new leftRightLine())
       topBottomLines.push(new topBotLine())
     }
